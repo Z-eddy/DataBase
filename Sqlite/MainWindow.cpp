@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+﻿#include "MainWindow.h"
 #include<iostream>
 #include<QSqlDatabase>
 #include<QSqlError>
@@ -40,6 +40,7 @@ void MainWindow::init()
 
 bool MainWindow::connectDB(const QString& dbName)
 {
+	//指定了名字就必须后面query实例化时指定名字
 	QSqlDatabase db{ QSqlDatabase::addDatabase("QSQLITE","con"+dbName) };
 	db.setDatabaseName(dbName);
 	if (db.isOpen()) {
