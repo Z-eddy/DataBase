@@ -41,16 +41,19 @@ void MainWindow::init()
 bool MainWindow::connectDB(const QString& dbName)
 {
 	//指定了名字就必须后面query实例化时指定名字
-	QSqlDatabase db{ QSqlDatabase::addDatabase("QMYSQL","con" + DBFileName) };
-	if (db.isOpen()) {
-		cout << "open" << endl;
+	QSqlDatabase db{ QSqlDatabase::database("con" + dbName) };
+	if (!db.isValid()) {//无效则创建链接
+		db = QSqlDatabase::addDatabase("QMYSQL", "con" + DBFileName);
+	}
+	if (db.isOpen()) {//如果已经打开则直接返回
 		return true;
 	}
+	//未打开链接则链接
 	db.setHostName("localHost");
 	db.setDatabaseName(dbName);
 	db.setUserName("root");
 	db.setPassword("123456");
-	if (!db.open()) {
+	if (!db.open()) {//打开失败时
 		cout << "db open error:" << db.lastError().text().toStdString() << endl;
 		return false;
 	}
