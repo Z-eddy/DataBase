@@ -8,10 +8,10 @@ using std::cout;
 using std::ends;
 using std::endl;
 
-static const QString DBFileName{ "test.db" };
+static const QString DBFileName{ "test" };
 
 MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent),ui(new Ui::MainWindow)
+	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
 	init();
@@ -25,11 +25,11 @@ MainWindow::~MainWindow()
 void MainWindow::init()
 {
 	if (connectDB(DBFileName)) {
-		QSqlQuery query(QSqlDatabase::database("con"+DBFileName));
+		QSqlQuery query(QSqlDatabase::database("con" + DBFileName));
 		const QString order{
 			"CREATE TABLE student("
-			"id INTEGER PRIMARY KEY AUTOINCREMENT,"
-			"name VARCHAR,"
+			"id INT PRIMARY KEY AUTO_INCREMENT,"
+			"name VARCHAR(20),"
 			"age INT)"
 		};
 		if (!query.exec(order)) {
@@ -41,12 +41,16 @@ void MainWindow::init()
 bool MainWindow::connectDB(const QString& dbName)
 {
 	//指定了名字就必须后面query实例化时指定名字
-	QSqlDatabase db{ QSqlDatabase::addDatabase("QSQLITE","con"+dbName) };
-	db.setDatabaseName(dbName);
+	QSqlDatabase db{ QSqlDatabase::addDatabase("QMYSQL","con" + DBFileName) };
 	if (db.isOpen()) {
-		return true; 
+		cout << "open" << endl;
+		return true;
 	}
-	else if (!db.open()) {
+	db.setHostName("localHost");
+	db.setDatabaseName(dbName);
+	db.setUserName("root");
+	db.setPassword("123456");
+	if (!db.open()) {
 		cout << "db open error:" << db.lastError().text().toStdString() << endl;
 		return false;
 	}
@@ -56,7 +60,7 @@ bool MainWindow::connectDB(const QString& dbName)
 void MainWindow::on_btnWrite_clicked()
 {
 	if (connectDB(DBFileName)) {
-		QSqlQuery query(QSqlDatabase::database("con"+DBFileName));
+		QSqlQuery query(QSqlDatabase::database("con" + DBFileName));
 		query.prepare("INSERT INTO student (name,age) VALUES (?,?)");
 		QVariantList names;
 		names << "nameA" << "nameB" << "nameC";
@@ -74,12 +78,12 @@ void MainWindow::on_btnWrite_clicked()
 void MainWindow::on_btnRead_clicked()
 {
 	if (connectDB(DBFileName)) {
-		QSqlQuery query(QSqlDatabase::database("con"+DBFileName));
+		QSqlQuery query(QSqlDatabase::database("con" + DBFileName));
 		query.exec("SELECT name,age FROM student");
 		while (query.next()) {
 			const auto name{ query.value(0).toString() };
 			const auto age{ query.value(1).toInt() };
 			cout << name.toStdString() << ends << age << endl;
 		}
-}
+	}
 }
