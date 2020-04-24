@@ -3,6 +3,8 @@
 #include<QSqlDatabase>
 #include<QSqlError>
 #include<QSqlQuery>
+#include<QSqlRecord>
+#include<QSqlTableModel>
 #include "ui_MainWindow.h"
 using std::cout;
 using std::ends;
@@ -60,7 +62,20 @@ bool MainWindow::connectDB(const QString& dbName)
 	return true;
 }
 
-void MainWindow::on_btnWrite_clicked()
+void MainWindow::querySelect()
+{
+	if (connectDB(DBFileName)) {
+		QSqlQuery query(QSqlDatabase::database("con" + DBFileName));
+		query.exec("SELECT name,age FROM student");
+		while (query.next()) {
+			const auto name{ query.value(0).toString() };
+			const auto age{ query.value(1).toInt() };
+			cout << name.toStdString() << ends << age << endl;
+		}
+	}
+}
+
+void MainWindow::queryInsert()
 {
 	if (connectDB(DBFileName)) {
 		QSqlQuery query(QSqlDatabase::database("con" + DBFileName));
@@ -78,15 +93,45 @@ void MainWindow::on_btnWrite_clicked()
 	}
 }
 
-void MainWindow::on_btnRead_clicked()
+void MainWindow::sqlTableSelect()
 {
 	if (connectDB(DBFileName)) {
-		QSqlQuery query(QSqlDatabase::database("con" + DBFileName));
-		query.exec("SELECT name,age FROM student");
-		while (query.next()) {
-			const auto name{ query.value(0).toString() };
-			const auto age{ query.value(1).toInt() };
-			cout << name.toStdString() << ends << age << endl;
+		QSqlTableModel model(nullptr,QSqlDatabase::database("con" + DBFileName));
+		model.setTable("student");
+		model.setFilter("age>20 and age<30");
+		if (model.select()) {//如果执行成功
+			const int size{ model.rowCount() };
+			for (int i{ 0 }; i < size; ++i) {
+				const QSqlRecord record{ model.record(i) };
+				auto name{ record.value("name").toString() };
+				auto age{ record.value("age").toInt() };
+				cout << name.toStdString() << ends << age << endl;
+			}
 		}
 	}
+}
+
+void MainWindow::sqlTableInsert()
+{
+	if (connectDB(DBFileName)) {
+		QSqlTableModel model{ nullptr,QSqlDatabase::database("con" + DBFileName) };
+		model.setTable("student");
+		int row{ 0 };
+		//model.removeRows(row, 1);//删除
+		model.insertRows(row, 1);
+		model.setData(model.index(row, 1), "Chen");//setData直接更改值
+		model.setData(model.index(row, 2), 22);
+		model.submitAll();//提交所有修改
+	}
+}
+
+void MainWindow::on_btnWrite_clicked()
+{
+	sqlTableInsert();
+}
+
+void MainWindow::on_btnRead_clicked()
+{
+	//sqlTableSelect();
+	querySelect();
 }

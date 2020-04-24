@@ -14,8 +14,14 @@ public:
 	~MainWindow();
 
 private:
+	//QSqlQuery
 	void init();
 	bool connectDB(const QString& dbName);
+	void querySelect();
+	void queryInsert();
+	//QSqlTableModel
+	void sqlTableSelect();
+	void sqlTableInsert();//delete
 
 	Ui::MainWindow *ui;
 
