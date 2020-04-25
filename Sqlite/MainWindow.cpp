@@ -127,7 +127,8 @@ void MainWindow::sqlTableInsert()
 
 void MainWindow::on_btnWrite_clicked()
 {
-	sqlTableInsert();
+	//sqlTableInsert();
+	queryInsert();
 }
 
 void MainWindow::on_btnRead_clicked()
