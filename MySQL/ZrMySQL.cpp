@@ -42,6 +42,7 @@ bool ZrMySQL::createDB(const QString&DBName)
 	return initDB();
 }
 
+/*
 bool ZrMySQL::createTable(const QString&tabName)
 {
 	if (!dataBase_)return false;//空指针时返回
@@ -54,6 +55,7 @@ bool ZrMySQL::createTable(const QString&tabName)
 	}
 	return true;
 }
+*/
 
 void ZrMySQL::init()
 {

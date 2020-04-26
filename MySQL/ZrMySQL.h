@@ -12,7 +12,7 @@ public:
 	QSqlDatabase getDataBase();
 	//创建并打开数据库,如果已存在则直接打开
 	bool createDB(const QString&DBName);
-	bool createTable(const QString&tabName);
+	//bool createTable(const QString&tabName);
 
 private:
 	void init();
