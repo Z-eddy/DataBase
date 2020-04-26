@@ -75,6 +75,7 @@ void ZrMySQL::initDBPointer()
 	}
 	if (dataBase_->isOpen())return;
 	dataBase_->setHostName("localHost");
+	dataBase_->setPort(3306);
 	dataBase_->setUserName("root");
 	dataBase_->setPassword("123456");
 	if (!dataBase_->open()) {
