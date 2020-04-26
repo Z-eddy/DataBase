@@ -19,7 +19,6 @@ void MainUI::init()
 {
 	mySql.createDB("test");
 	theModel = new QSqlTableModel(this, mySql.getDataBase());
-	theModel->setSort(1, Qt::AscendingOrder);//index 1 name排序
 
 	ui->tableView->setModel(theModel);
 	ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -53,8 +52,15 @@ void MainUI::on_comboDB_currentIndexChanged(int index)
 		break;
 	}
 	theModel->setTable(tableName);
+	theModel->setSort(0, Qt::AscendingOrder);//index 1 name排序
 	//theModel->setFilter("id=2");//设置where条件
 	//theModel->setHeaderData(1, Qt::Horizontal, "aName");//手动指定列名
 	//theModel->setHeaderData(2, Qt::Horizontal, "theAge");//默认用数据库指定的名字
 	theModel->select();
+}
+
+void MainUI::on_btnQuery_clicked()
+{
+	const auto s{ ui->textEdit->toPlainText() };
+	mySql.query(s);
 }

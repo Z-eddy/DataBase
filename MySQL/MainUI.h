@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QWidget>
 #include<QSqlTableModel>
 #include "ZrMySQL.h"
@@ -22,4 +22,5 @@ private:
 
 private slots:
 	void on_comboDB_currentIndexChanged(int index);
+	void on_btnQuery_clicked();
 };

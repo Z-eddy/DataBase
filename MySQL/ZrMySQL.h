@@ -13,6 +13,8 @@ public:
 	//创建并打开数据库,如果已存在则直接打开
 	bool createDB(const QString&DBName);
 	//bool createTable(const QString&tabName);
+	//执行query
+	void query(const QString&s);
 
 private:
 	void init();

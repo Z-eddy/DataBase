@@ -42,6 +42,14 @@ bool ZrMySQL::createDB(const QString&DBName)
 	return initDB();
 }
 
+void ZrMySQL::query(const QString&s)
+{
+	dataBase_->exec(s);
+	if (dataBase_->lastError().isValid()) {
+		cout << "query error:" << dataBase_->lastError().text().toStdString() << endl;
+	}
+}
+
 /*
 bool ZrMySQL::createTable(const QString&tabName)
 {
