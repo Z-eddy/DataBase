@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <QWidget>
-#include<QSqlTableModel>
+//#include<QSqlTableModel>
+#include<QSqlRelationalTableModel>
 #include "ZrMySQL.h"
 
 namespace Ui { class MainUI; };
@@ -18,7 +19,7 @@ private:
 
 	Ui::MainUI *ui;
 	ZrMySQL mySql;
-	QSqlTableModel *theModel;
+	QSqlRelationalTableModel *theModel;
 
 private slots:
 	void on_comboDB_currentIndexChanged(int index);

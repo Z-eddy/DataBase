@@ -1,5 +1,6 @@
 ﻿#include "MainUI.h"
 #include "ui_MainUI.h"
+#include<QSqlRelationalDelegate>
 
 MainUI::MainUI(QWidget *parent)
 	: QWidget(parent),mySql("conMySQL"),\
@@ -18,14 +19,18 @@ MainUI::~MainUI()
 void MainUI::init()
 {
 	mySql.createDB("test");
-	theModel = new QSqlTableModel(this, mySql.getDataBase());
+	theModel = new QSqlRelationalTableModel(this, mySql.getDataBase());
 
 	ui->tableView->setModel(theModel);
 	ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	//ui->tableView->setColumnHidden(0, true);//id 列隐藏
 	ui->tableView->resizeColumnsToContents();//大小适配文本
-	ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);//无法编辑
+	//ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);//无法编辑
+
+	//设置外键的代理后,界面显示为可选择的枚举,否则编辑时为city name的QString,但是
+	//实际只接受student address的int值,直接更改QString值无效
+	ui->tableView->setItemDelegate(new QSqlRelationalDelegate(ui->tableView));
 
 	QHeaderView *header{ ui->tableView->horizontalHeader() };
 	header->setStretchLastSection(true);//最后一列拉伸,不显示空白列
@@ -52,6 +57,10 @@ void MainUI::on_comboDB_currentIndexChanged(int index)
 		break;
 	}
 	theModel->setTable(tableName);
+	if (tableName == "student") {
+		theModel->setRelation(3, QSqlRelation{ "city","id","name" });
+		theModel->setHeaderData(3, Qt::Horizontal, "theCity");
+	}
 	theModel->setSort(0, Qt::AscendingOrder);//index 1 name排序
 	//theModel->setFilter("id=2");//设置where条件
 	//theModel->setHeaderData(1, Qt::Horizontal, "aName");//手动指定列名
