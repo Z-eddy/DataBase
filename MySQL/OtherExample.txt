@@ -1,0 +1,70 @@
+//**********MySQL数据库从无到有创建过程
+//**********打印sql数据库驱动
+QStringList drivers = QSqlDatabase::drivers();  
+qDebug() << drivers;  
+
+QString querystring;
+//**********创建数据库连接
+sql = QSqlDatabase::addDatabase("QMYSQL", "testConnect");
+sql.setHostName("127.0.0.1");
+sql.setPort(3306);
+sql.setUserName("root");
+sql.setPassword("123456");
+if(!sql.open())
+{
+    qDebug()<<"open failed";
+    return;
+}
+else
+{
+    qDebug()<<"open succeeded";
+}
+
+//**********创建数据库
+sql = QSqlDatabase::database("testConnect");
+querystring = "CREATE DATABASE IF NOT EXISTS operatesql";
+sql.exec(querystring);  
+if (sql.lastError().isValid())  
+{  
+    qDebug() << sql.lastError();  
+    qDebug() << "Create database failed.";  
+    return;
+}  
+else  
+{  
+    qDebug() << "Create database successfully.";  
+}  
+
+//**********创建数据表
+sql = QSqlDatabase::database("testConnect");
+sql.setDatabaseName("operatesql");
+if(!sql.open())
+{
+    qDebug()<<"open failed";
+    return;
+}
+else
+{
+    qDebug()<<"open succeeded";
+}
+
+querystring = 
+    "CREATE TABLE IF NOT EXISTS operatesql.persons\
+    (\
+    number int,\
+    name varchar(255),\
+    sex varchar(255),\
+    score float\
+    )";
+sql.exec(querystring); 
+if (sql.lastError().isValid())  
+{  
+    qDebug() << sql.lastError();  
+    qDebug() << "Create database failed.";  
+    return;
+}  
+else  
+{  
+    qDebug() << "Create database successfully.";  
+}  
+QMessageBox::information(NULL, "Warning", "Create Successful");

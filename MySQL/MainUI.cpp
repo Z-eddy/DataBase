@@ -2,7 +2,7 @@
 #include "ui_MainUI.h"
 
 MainUI::MainUI(QWidget *parent)
-	: QWidget(parent),mySql("test","conMySQL"),\
+	: QWidget(parent),mySql("conMySQL"),\
 	theModel(nullptr)
 {
 	ui = new Ui::MainUI();
@@ -17,7 +17,8 @@ MainUI::~MainUI()
 
 void MainUI::init()
 {
-	theModel = new QSqlTableModel(this, *mySql.getDataBase());
+	mySql.createDB("test");
+	theModel = new QSqlTableModel(this, mySql.getDataBase());
 	theModel->setSort(1, Qt::AscendingOrder);//index 1 name排序
 
 	ui->tableView->setModel(theModel);
