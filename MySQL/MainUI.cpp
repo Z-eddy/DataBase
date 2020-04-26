@@ -1,4 +1,4 @@
-#include "MainUI.h"
+ï»¿#include "MainUI.h"
 #include "ui_MainUI.h"
 
 MainUI::MainUI(QWidget *parent)
@@ -18,17 +18,17 @@ MainUI::~MainUI()
 void MainUI::init()
 {
 	theModel = new QSqlTableModel(this, *mySql.getDataBase());
-	theModel->setSort(1, Qt::AscendingOrder);//index 1 nameÅÅÐò
+	theModel->setSort(1, Qt::AscendingOrder);//index 1 nameæŽ’åº
 
 	ui->tableView->setModel(theModel);
 	ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	//ui->tableView->setColumnHidden(0, true);//id ÁÐÒþ²Ø
-	ui->tableView->resizeColumnsToContents();//´óÐ¡ÊÊÅäÎÄ±¾
-	ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);//ÎÞ·¨±à¼­
+	//ui->tableView->setColumnHidden(0, true);//id åˆ—éšè—
+	ui->tableView->resizeColumnsToContents();//å¤§å°é€‚é…æ–‡æœ¬
+	ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);//æ— æ³•ç¼–è¾‘
 
 	QHeaderView *header{ ui->tableView->horizontalHeader() };
-	header->setStretchLastSection(true);//×îºóÒ»ÁÐÀ­Éì,²»ÏÔÊ¾¿Õ°×ÁÐ
+	header->setStretchLastSection(true);//æœ€åŽä¸€åˆ—æ‹‰ä¼¸,ä¸æ˜¾ç¤ºç©ºç™½åˆ—
 }
 
 void MainUI::on_comboDB_currentIndexChanged(int index)
@@ -52,7 +52,8 @@ void MainUI::on_comboDB_currentIndexChanged(int index)
 		break;
 	}
 	theModel->setTable(tableName);
-	//theModel->setHeaderData(1, Qt::Horizontal, "aName");//ÊÖ¶¯Ö¸¶¨ÁÐÃû
-	//theModel->setHeaderData(2, Qt::Horizontal, "theAge");//Ä¬ÈÏÓÃÊý¾Ý¿âÖ¸¶¨µÄÃû×Ö
+	//theModel->setFilter("id=2");//è®¾ç½®whereæ¡ä»¶
+	//theModel->setHeaderData(1, Qt::Horizontal, "aName");//æ‰‹åŠ¨æŒ‡å®šåˆ—å
+	//theModel->setHeaderData(2, Qt::Horizontal, "theAge");//é»˜è®¤ç”¨æ•°æ®åº“æŒ‡å®šçš„åå­—
 	theModel->select();
 }
