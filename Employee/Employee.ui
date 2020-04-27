@@ -38,7 +38,7 @@
       <property name="handleWidth">
        <number>1</number>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -56,7 +56,11 @@
               </widget>
              </item>
              <item row="0" column="1" colspan="2">
-              <widget class="QComboBox" name="comboField"/>
+              <widget class="QComboBox" name="comboField">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <spacer name="horizontalSpacer_4">
@@ -73,13 +77,22 @@
              </item>
              <item row="1" column="1">
               <widget class="QRadioButton" name="rBtnAscend">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>升序</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
              <item row="1" column="2">
               <widget class="QRadioButton" name="rBtnDescend">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>降序</string>
                </property>
@@ -96,6 +109,9 @@
             <layout class="QGridLayout" name="gridLayout_5">
              <item row="0" column="0">
               <widget class="QRadioButton" name="rBtnMan">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>男</string>
                </property>
@@ -103,6 +119,9 @@
              </item>
              <item row="0" column="1">
               <widget class="QRadioButton" name="rBtnWoman">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>女</string>
                </property>
@@ -110,8 +129,14 @@
              </item>
              <item row="1" column="0">
               <widget class="QRadioButton" name="rBtnBoth">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>全部显示</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -138,7 +163,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <layout class="QGridLayout" name="gridLayout_6">
@@ -541,6 +566,9 @@
    </property>
   </action>
   <action name="actAppend">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/append</normaloff>:/images/append</iconset>
@@ -550,6 +578,9 @@
    </property>
   </action>
   <action name="actInsert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/insert</normaloff>:/images/insert</iconset>
@@ -559,6 +590,9 @@
    </property>
   </action>
   <action name="actDelete">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/delete</normaloff>:/images/delete</iconset>
@@ -568,6 +602,9 @@
    </property>
   </action>
   <action name="actPhoto">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/photo</normaloff>:/images/photo</iconset>
@@ -577,6 +614,9 @@
    </property>
   </action>
   <action name="actClear">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/clear</normaloff>:/images/clear</iconset>
@@ -586,6 +626,9 @@
    </property>
   </action>
   <action name="actScan">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/scan</normaloff>:/images/scan</iconset>
@@ -595,6 +638,9 @@
    </property>
   </action>
   <action name="actSubmit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/submit</normaloff>:/images/submit</iconset>
@@ -604,6 +650,9 @@
    </property>
   </action>
   <action name="actRevert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="Employee.qrc">
      <normaloff>:/images/revert</normaloff>:/images/revert</iconset>
