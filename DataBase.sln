@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sqlite", "Sqlite\Sqlite.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MySQL", "MySQL\MySQL.vcxproj", "{DC70EB06-65DE-4202-98B1-C3B77A53A18E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Employee", "Employee\Employee.vcxproj", "{A33FD7EC-815D-4309-A350-F9E7C7627F60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{DC70EB06-65DE-4202-98B1-C3B77A53A18E}.Debug|x64.Build.0 = Debug|x64
 		{DC70EB06-65DE-4202-98B1-C3B77A53A18E}.Release|x64.ActiveCfg = Release|x64
 		{DC70EB06-65DE-4202-98B1-C3B77A53A18E}.Release|x64.Build.0 = Release|x64
+		{A33FD7EC-815D-4309-A350-F9E7C7627F60}.Debug|x64.ActiveCfg = Debug|x64
+		{A33FD7EC-815D-4309-A350-F9E7C7627F60}.Debug|x64.Build.0 = Debug|x64
+		{A33FD7EC-815D-4309-A350-F9E7C7627F60}.Release|x64.ActiveCfg = Release|x64
+		{A33FD7EC-815D-4309-A350-F9E7C7627F60}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
