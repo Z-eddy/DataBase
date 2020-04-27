@@ -12,7 +12,6 @@ Employee::Employee(QWidget *parent)
 	ui.setupUi(this);
 }
 
-static const QString TABLENAME{ "employee" };//table name
 bool Employee::initConnect()
 {
 	DB_ = QSqlDatabase::addDatabase("QSQLITE", "theSqliteConnectName");
@@ -20,7 +19,7 @@ bool Employee::initConnect()
 		cout <<"invalid:"<< DB_.lastError().text().toStdString() << endl;
 		return false;
 	}
-	DB_.setDatabaseName(TABLENAME);
+	DB_.setDatabaseName(DBPath_);
 	if (!DB_.open()) {//成功打开
 		cout <<"DB open error:"<< DB_.lastError().text().toStdString() << endl;
 		return false;
@@ -28,10 +27,20 @@ bool Employee::initConnect()
 	return true;
 }
 
+static const QString TABLENAME{ "employee" };//table name
 void Employee::initModel()
 {
 	theModel = new QSqlTableModel(this, DB_);
+	theModel->setEditStrategy(QSqlTableModel::OnManualSubmit);//更改view数据时不自动提交
+	theModel->setTable(TABLENAME);
+	theModel->setSort(0, Qt::AscendingOrder);
+	ui.tabView->setModel(theModel);
+
 	theSelectionModel = new QItemSelectionModel(theModel);
+	ui.tabView->setSelectionModel(theSelectionModel);
+	connect(theSelectionModel, &QItemSelectionModel::currentChanged, this, &Employee::on_currentChanged);
+	connect(theSelectionModel, &QItemSelectionModel::currentRowChanged, this, &Employee::on_currentRowChanged);
+	theModel->select();
 }
 
 void Employee::setActState(bool ok)
@@ -43,6 +52,16 @@ void Employee::setActState(bool ok)
 	ui.actPhoto->setEnabled(ok);
 	ui.actClear->setEnabled(ok);
 	ui.actScan->setEnabled(ok);
+}
+
+void Employee::on_currentChanged()
+{
+
+}
+
+void Employee::on_currentRowChanged()
+{
+
 }
 
 void Employee::on_actOpen_triggered()

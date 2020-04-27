@@ -14,7 +14,6 @@ public:
 	Employee(QWidget *parent = Q_NULLPTR);
 
 private:
-	void init();
 	bool initConnect();//初始化数据库链接
 	void initModel();//初始化view的模型
 	void setActState(bool ok);//设置使用的action状态
