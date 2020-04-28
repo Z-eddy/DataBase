@@ -42,12 +42,17 @@ void Employee::initTabView()
 
 bool Employee::initConnect()
 {
-	DB_ = QSqlDatabase::addDatabase("QSQLITE", "theSqliteConnectName");
+	DB_ = QSqlDatabase::addDatabase("QMYSQL", "theMySQLConnectName");
+	DB_.setHostName("localhost");
+	DB_.setPort(3306);
+	DB_.setUserName("root");
+	DB_.setPassword("123456");
 	if (!DB_.isValid()) {
 		cout <<"invalid:"<< DB_.lastError().text().toStdString() << endl;
 		return false;
 	}
-	DB_.setDatabaseName(DBPath_);
+	//DB_.setDatabaseName(DBPath_);
+	DB_.setDatabaseName("test");
 	if (!DB_.open()) {//成功打开
 		cout <<"DB open error:"<< DB_.lastError().text().toStdString() << endl;
 		return false;
@@ -176,11 +181,13 @@ void Employee::on_currentRowChanged(const QModelIndex&current, const QModelIndex
 
 void Employee::on_actOpen_triggered()
 {
+	/*
 	const QString tempPath{ QFileDialog::getOpenFileName(this,tr("选择数据库"),DBPath_,"DB(*.db3 *.db);;Other(*.*)") };
 	if (tempPath.isEmpty())return;
 	if (DBPath_ != tempPath) {//记忆路径
 		DBPath_ = tempPath;
 	}
+	*/
 	init();
 }
 
