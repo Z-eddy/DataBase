@@ -43,11 +43,11 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>排序</string>
+           <widget class="QGroupBox" name="gBoxSort">
+            <property name="enabled">
+             <bool>false</bool>
             </property>
-            <layout class="QGridLayout" name="gridLayout_4">
+            <layout class="QGridLayout" name="gridLayout_2">
              <item row="0" column="0">
               <widget class="QLabel" name="label_15">
                <property name="text">
@@ -57,9 +57,6 @@
              </item>
              <item row="0" column="1" colspan="2">
               <widget class="QComboBox" name="comboField">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -77,9 +74,6 @@
              </item>
              <item row="1" column="1">
               <widget class="QRadioButton" name="rBtnAscend">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="text">
                 <string>升序</string>
                </property>
@@ -90,9 +84,6 @@
              </item>
              <item row="1" column="2">
               <widget class="QRadioButton" name="rBtnDescend">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="text">
                 <string>降序</string>
                </property>
@@ -102,16 +93,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_4">
-            <property name="title">
-             <string>过滤</string>
+           <widget class="QGroupBox" name="gBoxFilter">
+            <property name="enabled">
+             <bool>false</bool>
             </property>
-            <layout class="QGridLayout" name="gridLayout_5">
+            <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">
               <widget class="QRadioButton" name="rBtnMan">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="text">
                 <string>男</string>
                </property>
@@ -119,9 +107,6 @@
              </item>
              <item row="0" column="1">
               <widget class="QRadioButton" name="rBtnWoman">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="text">
                 <string>女</string>
                </property>
@@ -129,9 +114,6 @@
              </item>
              <item row="1" column="0">
               <widget class="QRadioButton" name="rBtnBoth">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="text">
                 <string>全部显示</string>
                </property>
